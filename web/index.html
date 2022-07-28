@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Spring Actuator - Startup</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1/new.min.css">
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="static/style.css">
+  </head>
+  <body>
+    <header>
+        <h3>Spring Actuator - Startup</h3>
+    </header>
+    <div class="row">
+      <div class="sumary">
+        <strong>STARTUP TIME: </strong> {{ .Timeline.Duration }}
+      </div>
+    </div>
+    {{range .Timeline.Events}}
+    <div class="row">
+      <div class="event">
+        <div class="event-title">
+          <strong>[{{.StartupStep.ID}}]</strong> {{.StartupStep.Name}}:
+          <span class="badge {{ classBasedOnDuration .Duration }}">{{.Duration}}</span>
+        </div>
+        <div class="event-body">
+          <ul class="tags">
+            {{range .StartupStep.Tags}}
+            <li><strong>{{.Key}}:</strong> {{.Value}}</li>
+            {{end}}
+          </ul>
+        </div>
+      </div>
+    </div>
+    {{end}}
+  </body>
+</html>
